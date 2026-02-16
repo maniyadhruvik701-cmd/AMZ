@@ -28,7 +28,9 @@ loadHistory();
 async function loadHistory() {
     try {
 
-        const response = await fetch(`${API_BASE}/history?t=${Date.now()}`);
+        const response = await fetch(`${API_BASE}/history?t=${Date.now()}`, {
+            headers: { 'ngrok-skip-browser-warning': 'true' }
+        });
         historyData = await response.json();
         renderFilters();
         renderHistoryList();
@@ -331,7 +333,10 @@ async function printFile(filename, silent = false) {
     try {
         const response = await fetch(`${API_BASE}/print`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'ngrok-skip-browser-warning': 'true'
+            },
             body: JSON.stringify({ filename })
         });
         const result = await response.json();
@@ -366,7 +371,10 @@ async function deleteFolder(folderOrAll) {
     try {
         const res = await fetch(`${API_BASE}/delete`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'ngrok-skip-browser-warning': 'true'
+            },
             body: JSON.stringify(payload)
         });
         const result = await res.json();
@@ -450,7 +458,11 @@ convertBtn.addEventListener('click', async () => {
     selectedFiles.forEach(file => formData.append('pdfs', file));
 
     try {
-        const response = await fetch(`${API_BASE}/convert`, { method: 'POST', body: formData });
+        const response = await fetch(`${API_BASE}/convert`, {
+            method: 'POST',
+            headers: { 'ngrok-skip-browser-warning': 'true' },
+            body: formData
+        });
         const result = await response.json();
 
         if (result.success) {
