@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Converter - A4 to Label Size</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="background-animation"></div>
+
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-left">
+                <h2>AutoLabel Dashboard</h2>
+            </div>
+            <div class="header-right">
+                <div class="user-badge">AL</div>
+                <div class="status-badge">
+                    <span class="status-dot"></span> TSC Printer Ready
+                </div>
+                <div class="server-config" onclick="configureServer()"
+                    style="cursor:pointer; color:var(--text-muted); font-size:1.2rem;">
+                    <i class="fa-solid fa-gear"></i>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <!-- Left Sidebar: Upload -->
+            <aside class="upload-sidebar">
+                <div class="sidebar-card">
+                    <h3>Upload Document</h3>
+                    <p class="subtitle">PDF files only</p>
+
+                    <div class="upload-box" id="drop-zone">
+                        <div class="upload-content">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                            <p><strong>Click or drag to select</strong></p>
+                            <span class="file-status">No file chosen</span>
+                        </div>
+                        <input type="file" id="file-input" accept=".pdf" multiple hidden>
+                    </div>
+
+                    <div class="folder-input-wrapper">
+                        <label>Folder / Tag Name</label>
+                        <input type="text" id="folder-name" placeholder="e.g. AJIO-BATCH-01">
+                    </div>
+
+                    <button id="convert-btn" class="btn-convert-full" disabled>
+                        Upload & Convert
+                    </button>
+
+                    <div class="loading-bar" id="loading-bar" style="display: none;">
+                        <div class="bar-fill"></div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Right Main: History -->
+            <main class="history-main">
+                <div class="history-header">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="select-all">
+                        <label for="select-all">Recent History</label>
+                    </div>
+                    <button class="btn-bulk-print" id="bulk-print-btn" style="display: none;">Print Selected</button>
+                </div>
+
+                <!-- Filters -->
+                <div class="filter-section" id="filter-container">
+                    <button class="filter-pill active" data-folder="all">All</button>
+                    <!-- Dynamic filters will be added here -->
+                </div>
+
+                <!-- File List -->
+                <div class="file-list" id="history-container">
+                    <!-- History Items will be rendered here -->
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="script.js?v=3"></script>
+</body>
+
+</html>
